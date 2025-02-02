@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-int random(int From , int To)
+char random(char From , char To)
 {
 	return rand() % (To - From + 1) + From;
 
@@ -10,30 +10,30 @@ string CreatePassword(int NumberOfThePassword, int Distinct)
 {
 	string ThePass = "";
 
-	int i = random(97, 122);
+	char i = random('a','z');
 	int CounterDistinct = 0; 
-	if (i + Distinct > 122)
+	if (i + Distinct > 'z')
 	{
 		i = 97;
 	}
-	int theNumber = i;
+	char theNumber = i;
 	
 
 
 	for (int j = 1; j <= NumberOfThePassword; j++)
 	{
 		
-		if (CounterDistinct != Distinct)
+		if (CounterDistinct == Distinct)
 		{
-			ThePass += char(theNumber);
+
+			theNumber = i;
+			CounterDistinct = 0;
+		}
+			ThePass += theNumber;
 			theNumber++;
 			CounterDistinct++;
-		}
-		else
-		{
-			int randChar = random(i, theNumber -1);
-			ThePass += (char)randChar;
-		}
+		
+		
 	}
 	return ThePass;
 	
